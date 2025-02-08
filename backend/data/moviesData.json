@@ -1,0 +1,62 @@
+[
+    {
+        "name" : "Jilla",
+        "description": "Jilla is a tamil movie which is a awsome movie",
+        "duration" : 150,
+        "ratings" : 9.2,
+        "totalRating": 3000,
+        "releaseYear": 2019,
+        "releaseDate": "2018",
+        "genres": [
+            "Action",
+            "Vijay"
+        ],
+        "directors": ["Vijay"],
+        "coverImage": "Jilla.jpg"
+    },
+    {
+        "name" : "Sura",
+        "description": "Sura is a tamil movie which is a awsome movie",
+        "duration" : 160,
+        "ratings" : 8.7,
+        "totalRating": 2000,
+        "releaseYear": 2020,
+        "releaseDate": "2018-7-17",
+        "genres": [
+            "Action",
+            "Vijay"
+        ],
+        "directors": ["Vijay"],
+        "coverImage": "Sura.jpg"
+    },
+    {
+        "name" : "Vaetaikaran",
+        "description": "Vaetaikaran is a tamil movie which is a awsome movie",
+        "duration" : 145,
+        "ratings" : 9.5,
+        "totalRating": 6000,
+        "releaseYear": 2017,
+        "releaseDate": "2018-7-17",
+        "genres": [
+            "Action",
+            "Vijay"
+        ],
+        "directors": ["Vijay"],
+        "coverImage": "Vaetaikaran.jpg"
+    },
+    {
+        "name" : "Bhairava",
+        "description": "Bhairava is a tamil movie which is a awsome movie",
+        "duration" : 180,
+        "ratings" : 9.3,
+        "totalRating": 19000,
+        "releaseYear": 2021,
+        "releaseDate": "2018-7-17",
+        "genres": [
+            "Action",
+            "Vijay"
+        ],
+        "directors": ["Vijay"],
+        "coverImage": "Bhairava.jpg"
+    }
+]
