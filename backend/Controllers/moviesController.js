@@ -53,7 +53,7 @@ exports.getMovie = asyncErrorhandler(async (req, res, next)=>{
 });
 exports.createMovie = asyncErrorhandler(async (req, res, next)=>{
     const movie = await Movie.create(req.body);
-    console.log(`${movie.name} movie is created`)
+    console.log(`${movie.name} movie is created by ${req.user.name}.`);
     res.status(201).json({
         status : 'success',
         data : {

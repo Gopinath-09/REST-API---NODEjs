@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -37,7 +38,14 @@ const userSchema = new mongoose.Schema({
             message: 'Password and Conform Password does not match'
         }
     },
-    passwordChangedAt: Date
+    active: {
+        type: Boolean,
+        default: true,
+        select: false
+    },
+    passwordChangedAt: Date,
+    passwordResetToken: String,
+    passwordResetTokenExpires: Date
 })
 
 userSchema.pre('save',async function(next){
@@ -47,6 +55,13 @@ userSchema.pre('save',async function(next){
     this.password = await bcrypt.hash(this.password, 12);
 
     this.confirmPassword = undefined;
+    next();
+})
+
+//query middleware
+userSchema.pre(/^find/, function(next){
+    //this keyword in the function will point to current query
+    this.find({active: {$ne: false}});
     next();
 })
 
@@ -62,6 +77,17 @@ userSchema.methods.isPasswordChanged = async function(JWTTimestamp){
         return JWTTimestamp < passChangedTimeStamp;
     }
     return false
+}
+
+userSchema.methods.createResetPasswordToken = function(){
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetTokenExpires = Date.now() + 10 * 60 * 1000;
+
+    console.log(resetToken, this.passwordResetToken);
+
+    return resetToken;
 }
 
 const User = mongoose.model('User', userSchema);

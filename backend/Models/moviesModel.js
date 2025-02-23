@@ -82,6 +82,7 @@ movieSchema.pre('save',function(next){
     next();
 })
 movieSchema.post('save',function(doc,next){
+    console.log(doc);
     const content = `New movie "${doc.name}" is added by ${doc.createdBy}\n`;
     fs.writeFileSync('./logs/create-movies.txt', content, {flag : 'a'}, err => {
         console.log(err);
