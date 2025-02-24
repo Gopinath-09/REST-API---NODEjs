@@ -39,8 +39,23 @@ app.use(cors({
 app.get('/',(req, res)=>{
     res.status(200).json({
         status: 'success',
+        use: '/api/v1/',
         data: {
-            movies: []
+            moviesRoutes: {
+                getAllMoviesData: 'movies | GET',
+                createMovie: 'movies | POST',
+                getAMovieData: 'movies/:id | GET',
+                updateMovie: 'movies/:id | PATCH',
+                deleteMovie: 'movies/:id | DELETE'
+            },
+            userRoutes: {
+                getAllUsersData: 'user/getallusers | GET',
+                deleteUser: 'user/deleteMe | DELETE'
+            },
+            authRoutes: {
+                loginUser: 'auth/signup | POST',
+                createUser: 'auth/login | POST'
+            }
         }
     })
 })
