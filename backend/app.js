@@ -24,7 +24,7 @@ app.use(helmet());
 //Rate limiter middleware
 //Prevent DOS and Brute Force Attack
 let limiter = rateLimit({
-    max: 1000,
+    max: 5,
     windowMs: 60 * 60 * 1000,
     message: "we have received too many requests from this IP. Please try after one hour."
 })

@@ -70,6 +70,7 @@ const movieSchema = new mongoose.Schema({
     toObject: { virtuals : true }
 });
 
+//after this create virtuals in schema
 movieSchema.virtual('durationInHours').get(function(){
     return  this.duration / 60;
 })
@@ -77,10 +78,10 @@ movieSchema.virtual('durationInHours').get(function(){
 //Mongoose Middleware
 //only used when save or create on mongooose methods
 //does not used when insertMany && findByIdAndUpdate and it will not work
-movieSchema.pre('save',function(next){
-    this.createdBy = "gopinath";
+/* movieSchema.pre('save',function(req,next){
+    this.createdBy = req.user.name;
     next();
-})
+}) */
 movieSchema.post('save',function(doc,next){
     console.log(doc);
     const content = `New movie "${doc.name}" is added by ${doc.createdBy}\n`;
