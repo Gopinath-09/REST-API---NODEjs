@@ -62,7 +62,7 @@ app.get('/',(req, res)=>{
 
 //middleware to enable json formats etc..
 //also we limit file size getting within 10kb
-app.use(express.json({limit: '10kb'}));
+app.use(express.json({limit: '1000kb'}));
 
 app.use(sanitize());
 
