@@ -21,6 +21,9 @@ const app = express();
 //security in headers cors , cdn etc..
 app.use(helmet());
 
+
+// Enable trust proxy to ensure Express uses the correct client IP from X-Forwarded-For
+app.set('trust proxy', true);
 //Rate limiter middleware
 //Prevent DOS and Brute Force Attack
 let limiter = rateLimit({
