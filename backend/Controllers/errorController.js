@@ -39,6 +39,7 @@ const validationErrorHandler = err =>{
     const errors = Object.values(err.errors).map(val => val.message);
     const errorMessages = errors.join('., ');
     const msg = `Invalid input data: ${errorMessages}`;
+    console.log(err)
     return new CustomError(msg, 400);
 }
 

@@ -9,9 +9,9 @@ class ApiFFPS{
         //using mongoose 6.0 or less
         const exclude = ['sort', 'page', 'limit', 'fields'];
         //creating a shallow obj instead of pointer the reference of req.query
-        let queryCopy = {...this.queryreq};
+        let queryCopy = {...this.queryreq}; //clone the query params
         exclude.forEach((el)=>{
-            delete queryCopy[el];
+            delete queryCopy[el]; // remove params not used for filtering
         })
 
         let queryStr = JSON.stringify(queryCopy);

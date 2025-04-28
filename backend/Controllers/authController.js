@@ -141,7 +141,7 @@ exports.forgotPassword = asyncErrorHandler(async (req, res, next) => {
 
     //3 Send the token to user email
     const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetpassword/${resetToken}`;
-    const message = `We have received a password reset request. Please use the below link to reset link to reset your password\n\n${resetURL}\n\nThis reset password link will be valid only for 10 minutes.`
+    const message = `Hey, I have received a password reset request. Please use the below link to reset link to reset your password\n\n${resetURL}\n\nThis reset password link will be valid only for 10 minutes.`
     
     try {
         await sendEmail({
@@ -167,6 +167,7 @@ exports.resetPassword = asyncErrorHandler(async(req, res, next) => {
     //1 Validating Token
     const token = crypto.createHash('sha256').update(req.params.token).digest('hex');
     const user = await User.findOne({passwordResetToken: token, passwordResetTokenExpires: {$gt: Date.now()}});
+    console.log("reset password: " + user);
     
     if(!user) next(new CustomError('Token is invalid or has expired',400));
 
@@ -176,8 +177,9 @@ exports.resetPassword = asyncErrorHandler(async(req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetTokenExpires = undefined;
     user.passwordChangedAt = Date.now();
+    console.log("reset password pre-save: " + user);
 
-    user.save();
+    await user.save();
 
     //3 Login the User
     createSendResponseWithToken(user, 200, res);

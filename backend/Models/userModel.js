@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please confrim yout password'],
         validate: {
-            //this will only work for sace() and create()
+            //this will only work for save() and create()
             validator: function(val){
                 return val === this.password
             },

@@ -23,7 +23,8 @@ app.use(helmet());
 
 
 // Enable trust proxy to ensure Express uses the correct client IP from X-Forwarded-For
-app.set('trust proxy', true);
+const checkProxyIP = process.env.NODE_ENV === 'development' ? false : true;
+app.set('trust proxy', checkProxyIP); //app.set('trust proxy', true); -> if production
 //Rate limiter middleware
 //Prevent DOS and Brute Force Attack
 let limiter = rateLimit({
